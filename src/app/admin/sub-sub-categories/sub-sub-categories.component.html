@@ -1,0 +1,111 @@
+
+<div class="container">
+  <div  style="margin-top:20%;position:absolute;text-align: center" *ngIf="loadtmp"> 
+    <img src="../../../assets/loading.gif" width="60px"  style="margin-left:50%">
+    </div>
+    <mat-form-field  style="width:90%">
+      <input type="text"  matInput placeholder="Subsubcatname" [(ngModel)]="txtsubcat" required>  
+        </mat-form-field>
+
+
+      
+
+    <mat-form-field  style="width:90%">
+      <mat-select placeholder="Select" placeholder="Select Category" [(ngModel)]="drpcat" (selectionChange)="fun_subcatbased_catid()" required>
+        <mat-option *ngFor="let x of catdata" value="{{x._id}}">
+            {{x.catname}}
+          </mat-option>
+  </mat-select>
+      
+    </mat-form-field>
+    <mat-form-field style="width:90%" >
+      <mat-select placeholder="Select SubCategory" [(ngModel)]="drpsubcat" required >
+          <mat-option *ngFor="let x of var_subcat_data" value="{{x._id}}">
+              {{x.subcatname}}
+            </mat-option>
+    </mat-select>
+    </mat-form-field>
+        
+  
+  
+  &nbsp;&nbsp;
+      <button type="button" class="btn btn-success" (click)="funinsert()">Insert</button>
+
+      <mat-form-field  style="width:90%">
+        <input type="text"  matInput placeholder="Searc Here" [(ngModel)]="filter">  
+          
+      </mat-form-field>
+
+  <table class="table">
+      <thead style="background-color: rgb(47, 173, 223)">
+          <tr style="color: lightgoldenrodyellow">
+            
+            <th (click)="sort('subsubcatname')">Sub sub Category</th>
+            <th>Sub Category</th>
+            <th>Category</th>
+
+            <th>Status</th>
+            
+            <th>#</th>
+            
+          </tr>
+        </thead>
+  
+        <tbody  style="background-color:snow">
+            <tr *ngFor="let x of var_get_datanew | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage:p };">
+                <ng-container *ngIf="temp!=x._id;else elsdiv">  
+              
+             <td>{{x.abc.subsubcatname}}</td>
+             <td>{{x.abc.subcatname}}</td>
+              <td>{{x.abc.catname}}</td>
+              <td>
+                <span *ngIf="x.status==1; else elsestatus">
+                Active
+                </span>
+                <ng-template #elsestatus>
+                  InActive
+                </ng-template>
+
+              </td>
+
+              <td>
+                <button type="button" class="btn btn-info" (click)="funedit(x)">EDIT                                                                                                                                                                                                                                    </button>
+              </td>
+</ng-container>
+            </tr>
+          </tbody>
+         
+          </table>
+
+  <ng-template #elsdiv>
+    <td><input type="text" [(ngModel)]="selectdata.subcatname" class="form-control" style="width:200px"></td>
+    <td>
+      <select class="form-control" [(ngModel)]="selectdata.cat_id">
+        <option *ngFor="let x of catdata" value="{{x._id}}">
+          {{x.catname}}
+        </option>
+      </select>
+    </td>
+      <td> <select [(ngModel)]="selectdata.status" class="form-control" style="width:200px">
+          <option value="1">Active</option>
+          <option value="0">InActive</option>
+         </select></td>
+
+         <td>
+<input type="button" value="Save" class="btn btn-success" (click)="funsubupdate()">
+<input type="button" value="Cancel" class="btn btn-danger" (click)="this.temp=0">
+
+
+         </td>
+         
+  </ng-template>
+
+      
+
+  
+  <div align="center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+
+</div>

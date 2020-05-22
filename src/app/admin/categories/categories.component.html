@@ -1,0 +1,80 @@
+<div class="container">
+  <div  style="margin-top:20%;position:absolute;text-align: center" *ngIf="loadtmp"> 
+    <img src="../../../assets/loading.gif" width="70px"  style="margin-left:50%">
+    </div>
+  
+  <mat-form-field style="width:80%">
+      
+      <input matInput placeholder="Category" [(ngModel)]="category" autocomplete="off" required>
+      
+     </mat-form-field>
+     <mat-form-field style="width:80%">
+     <input matInput placeholder="Status" [(ngModel)]="Active" autocomplete="off" required>
+      
+    </mat-form-field>
+     &nbsp; <button type="button" class="btn btn-primary" (click)="funinsert()">Insert</button>
+     
+     <mat-form-field  style="width:80%">
+      <input type="text"  matInput placeholder="Search Here" [(ngModel)]="filter">  
+        
+    </mat-form-field>
+  <table class="table">
+      <thead style="background-color: rgb(47, 173, 223)">
+          <tr style="color: lightgoldenrodyellow">
+            <!--  -->
+            <th (click)="sort('catname')">Category</th>
+            <th>Status</th>
+            
+            <th>Edit</th>
+            
+          </tr>
+        </thead>
+  <!-- {{var_get_data | json}} -->
+        <tbody  style="background-color:snow">
+            <tr *ngFor="let x of var_get_data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage:p };">
+                <ng-container *ngIf="temp!=x._id;else elsdiv">  
+             <td>{{x.catname}}</td>
+
+              <td>
+                <span *ngIf="x.Active==1; else elsestatus">
+                Active
+                </span>
+                <ng-template #elsestatus>
+                  InActive
+                </ng-template>
+
+              </td>
+
+              <td>
+                <button type="button" class="btn btn-info" (click)="funedit(x)">EDIT                                                                                                                                                                                                                                    </button>
+              </td>
+</ng-container>
+            </tr>
+          </tbody>
+         
+          </table>
+
+  <ng-template #elsdiv>
+
+
+    <td><input type="text" [(ngModel)]="selectdata.catname" class="form-control" style="width:200px"></td>
+    
+      <td> <select [(ngModel)]="selectdata.status" class="form-control" style="width:200px">
+          <option value="1">Active</option>
+          <option value="0">InActive</option>
+         </select></td>
+
+         <td>
+
+
+
+         </td>
+         
+  </ng-template>
+<div align="center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+
+  

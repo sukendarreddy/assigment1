@@ -1,0 +1,42 @@
+
+<!-- {{productdata|json}} -->
+<div class="container">
+  <!-- row -->
+  <div class="row">
+    <!-- Product Single -->
+    <div class="col-md-3 col-sm-6 col-xs-6" *ngFor="let x of productdata">
+      <div class="product product-single">
+        <div>
+            <span   style="font-size: 25px;color:lightgray" (click)="whishlist" ><i class="fa fa-heart"></i></span>
+        </div>
+        <div class="product-thumb">
+           
+          <div class="product-label">
+            <!-- <span>{{x.producttype}}</span>
+             -->
+          </div>
+          <a class="main-btn quick-view" [routerLink]="['../productdata',{_id:x._id}]"><i class="fa fa-search-plus" ></i>More</a>
+          
+          <img src="../../../assets/productimages/{{x.images[0]}}" alt="">
+        </div>
+        <div class="product-body">
+          <h5 class="product-price">{{x.productPrice | currency:"INR"}} <del class="product-old-price">{{x.productoldprice | currency:"INR"}}</del></h5>&nbsp;
+          <span class="sale" style="color: darkturquoise">{{x.productdisc}}</span>
+          <div class="productrating">
+            <i class="fa fa-star" *ngFor="let ra of x.ratarr" style="color: coral"></i>
+            
+            <i class="fa fa-star-o empty" *ngFor="let ra of x.emparr"></i>
+          </div>
+          <h2 class="product-name" style="color:blue;text-align: center" [routerLink]="['../productdata',{_id:x._id}]" >{{x.productname}}</h2>
+          <div class="product-btns">
+            
+          
+            <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- /Product Single -->
+
+    <!-- Product Single -->

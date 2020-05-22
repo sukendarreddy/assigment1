@@ -1,0 +1,32 @@
+{
+    "/catref/*":{
+        "target":"http://localhost:1000",
+        "secure":true
+    },
+    "/subcatref/*":{
+        "target":"http://localhost:1000",
+        "secure":true
+    
+    },
+    "/subsubcatref/*":{
+        "target":"http://localhost:1000",
+        "secure":true
+    
+    },
+    "/prodref/*":{
+        "target":"http://localhost:1000",
+        "secure":true
+    
+    },
+
+"/regisration/*":{
+    "target":"http://localhost:1000",
+    "secure":true
+
+},
+"/catitem/":{
+    "target":"http://localhost:1000",
+    "secure":true
+
+}
+}

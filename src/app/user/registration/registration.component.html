@@ -1,0 +1,68 @@
+
+
+
+<div class="container" style="height: 80%">
+  <div class="row" style="height: 80%;background-color:rgba(235, 224, 223, 0.993);text-emphasis-color:green">
+  <div class="col-12 col-md-12">
+    <h2 style="color:green;font-style: italic;text-align:center">Registraion form</h2>
+    <div class="col-12 col-md-6">
+
+        <mat-form-field  style="width:40%">
+            <input type="text"  matInput placeholder="First Name" [(ngModel)]="firstname" autocomplete="off" >  
+            </mat-form-field>
+
+            <mat-form-field  style="width:40%">
+                <input type="text"  matInput placeholder="Last Name" [(ngModel)]="lastname" autocomplete="off" >  
+                </mat-form-field>
+                <mat-form-field  style="width:40%">
+                  <input type="text"  matInput placeholder="Surname" [(ngModel)]="Surname" autocomplete="off" >  
+                  </mat-form-field><b>Gender:</b>
+                
+               
+                <mat-radio-group aria-label="Gender" [(ngModel)]="Gender" autocomplete="off">
+                    <mat-radio-button value="Male">Male</mat-radio-button>
+                    <mat-radio-button value="Female">Female</mat-radio-button>
+                  </mat-radio-group>
+                <br>
+                  <mat-form-field  style="width:80%">
+                      <input type="date"  matInput placeholder="DOB" [(ngModel)]="DOB" autocomplete="off" >  
+                      
+                      </mat-form-field>
+                      
+                      <mat-form-field  style="width:80%">
+                          <input type="number"  matInput placeholder="Mobile No" [(ngModel)]="mobileno" autocomplete="off" >  
+                          </mat-form-field>
+
+                        
+
+    </div>
+    <div class="col-12 col-md-6">
+
+        <mat-form-field  style="width:80%">
+            <input type="text"  matInput placeholder="Create Userid" [(ngModel)]="userid" autocomplete="off" >  
+          </mat-form-field>
+    <mat-form-field  style="width:40%">
+      <input type="password"  matInput placeholder="Enter Password" [(ngModel)]="password" autocomplete="off" >  
+      </mat-form-field>
+           
+                <mat-form-field  style="width:40%">
+                    <input type="password"  matInput placeholder="Comform Password" [(ngModel)]="cpassword" autocomplete="off" >  
+                    </mat-form-field>
+                   
+                    <mat-form-field  style="width:80%">
+                        <input type="text"  matInput placeholder="Delivary Address" [(ngModel)]="Adrees1" autocomplete="off" >  
+                        </mat-form-field>
+
+                        <mat-form-field  style="width:80%">
+                            <input type="text"  matInput placeholder="Billing Address" [(ngModel)]="Adrees2" autocomplete="off" >  
+                            </mat-form-field>
+      
+            <!-- <h6>Check Above all Fields Once again</h6> -->
+                            <button type="button" class="btn btn-success" (click)=" registrat()">Submit</button>
+
+
+
+
+    </div>
+  </div>
+    </div></div>

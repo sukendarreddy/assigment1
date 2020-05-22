@@ -1,0 +1,46 @@
+   <div class="container" >
+     {{var_productpage_id|json}}
+    <span style="font-size:20px"> Shopping Cart</span> 
+    <hr>
+    <img src="../../../assets/emptycart.jpg" *ngIf="!tmp">
+    <ng-container *ngIf="tmp">
+    <div class="row" *ngFor="let view of var_productpage_id;index as ind" style="margin-top: 20px">
+    <div class="col-sm-2">
+     <div class="product-thumb">
+          <img src="../../../assets/prod_img/{{view.images}}" alt="" style="width: 100px;height:100px;margin-left: 20px;">
+      </div>
+      </div>
+      
+      <div class="col-sm-7 product-body">
+            <h4 class="product-name">Product Name:{{view.productname}}</h4>
+            <h4 class="product-price">Product Price:{{view.newprice|currency:"INR"}} </h4>
+          
+          <div>
+          <label>QTY:</label>  &nbsp;  
+          <input type="number" (change)="funUpdateQty(view.pid,ind)" id="txt{{ind}}" value={{view.userquantity}} style="width: 80px"  >
+          <span style="padding-left:20px;"><b>Total: {{view.prototamout | currency:"INR"}}</b></span>
+          </div>
+        
+      </div>
+    
+    <div class="col-sm-2" >
+      
+      <button style="color: red" (click)="funCartItemRemove(view.pid)"><i class="fa fa-trash"></i></button>
+    </div>
+ </div>
+
+<hr>
+ <span style="color:blue;font-weight:bold;font-size:20px;float:right;margin-right:60px">Grand Total:{{totalamount|currency:"INR"}}</span>
+ <br><br>
+
+  <span>
+  <button class="btn-success"  style="font-weight:bold;font-size:20px;float:right;margin-right:30px"  (click)="ser.funproceed()">Proceed To Buy</button>
+
+   </span>
+<br>
+<br>
+
+</ng-container>
+<hr>
+</div>
+

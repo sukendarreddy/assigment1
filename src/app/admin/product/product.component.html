@@ -1,0 +1,181 @@
+<div class="container-fluid">
+  <div class="row">
+<div class="col-12 col-md-6">
+    <!-- <mat-form-field  style="width:80%">
+        <input type="text"  matInput placeholder="Product Id" [(ngModel)]="_id" autocomplete="off" >  
+        </mat-form-field> -->
+  <mat-form-field  style="width:80%">
+    <input type="text"  matInput placeholder="Product Name" [(ngModel)]="productname" autocomplete="off" required >  
+    </mat-form-field>
+    <mat-form-field  style="width:80%">
+            <input type="text"  matInput placeholder="Product Brand" [(ngModel)]="pbrand" autocomplete="off" required >  
+            </mat-form-field>
+
+    <mat-form-field  style="width:80%">
+        <input type="number"  matInput placeholder="Product New Price"  [(ngModel)]="productprice" autocomplete="off" required>  
+        </mat-form-field>
+
+        <mat-form-field  style="width:80%">
+            <input type="number"  matInput placeholder="Product old Price"  [(ngModel)]="productoldprice" autocomplete="off" required>  
+            </mat-form-field>
+            <mat-form-field  style="width:80%">
+                <input type="text"  matInput placeholder="Discount on product "  [(ngModel)]="productdisc" autocomplete="off" required >  
+                </mat-form-field>
+
+
+
+        <mat-form-field  style="width:80%">
+            <mat-select placeholder="Select" placeholder="Product type" [(ngModel)]="producttype" required>
+                <mat-option value="New Product">New Product</mat-option>
+                <mat-option value="Upcoming Product">Upcoming Product</mat-option>
+                <mat-option value="Offer Products">Offer Products</mat-option>
+            </mat-select>
+            </mat-form-field>
+
+            <mat-form-field  style="width:80%">
+                <input type="text"  matInput placeholder="Offer" [(ngModel)]="productoffer" required>
+                  
+               
+                </mat-form-field>
+
+
+
+
+            <mat-form-field  style="width:80%">
+                <mat-select placeholder="Select" placeholder="Product Rating" [(ngModel)]="productrating" required>
+                    <mat-option value=1>1</mat-option>
+                    <mat-option value=2>2</mat-option>
+                    <mat-option value=3>3</mat-option>
+                    <mat-option value=4>4</mat-option>
+                    <mat-option value=5>5</mat-option>
+                </mat-select>
+                </mat-form-field>
+</div>
+<div class="col-12 col-md-6">
+    <mat-form-field  style="width:80%">
+        <input type="color"  matInput placeholder="Color" [(ngModel)]="productcolor" >  
+        </mat-form-field>
+        <mat-form-field  style="width:80%">
+            <input type="number"  matInput placeholder="Quantity" autocomplete="off" [(ngModel)]="quantity" required>  
+            </mat-form-field>
+            <mat-form-field  style="width:80%">
+                <input type="text"  matInput placeholder="Description" autocomplete="off" [(ngModel)]="product_desc" required>  
+                </mat-form-field>
+
+            <mat-form-field style="width:80%" >
+                <mat-select placeholder="Select" placeholder="Select Category" (selectionChange)="fungetSubCat()" [(ngModel)]="drpcat" required >
+                    <mat-option *ngFor="let cat of varcatdata" value={{cat._id}} >
+                        {{cat.catname}}
+                      </mat-option>
+              </mat-select>
+              </mat-form-field>
+
+              <mat-form-field style="width:80%" >
+                  <mat-select placeholder="Select" placeholder="Select SubCategory" (selectionChange)="fungetsubsubcat()" [(ngModel)]="drpsubcat" required>
+                      <mat-option *ngFor="let subcat of varsubcatdata" value={{subcat._id}} >
+                          {{subcat.subcatname}}
+                        </mat-option>
+                </mat-select>
+                </mat-form-field>
+
+                <mat-form-field style="width:80%" >
+                    <mat-select placeholder="Select" placeholder="Select SubSubCategory"  [(ngModel)]="drpsubsubcat" required>
+                        <mat-option *ngFor="let subsubcat of varsubsubcatdata" value={{subsubcat._id}} >
+                            {{subsubcat.subsubcatname}}
+                          </mat-option>
+
+                  </mat-select></mat-form-field>&nbsp;&nbsp;
+                  <div>
+                  <form method="post" action="{{varserverhost}}/insImages" id="frm1" enctype="multipart/form-data">
+    
+                    <label>Images</label><input type="file" multiple="true" name="f1">
+                
+                </form></div>
+                  <button type="button" class="btn btn-success" (click)="productinsert()">Insert</button>
+                  
+
+
+</div>
+<mat-form-field  style="width:100%; text-align:center">
+    <input type="text"  matInput placeholder="Search Here" [(ngModel)]="filter">  
+      
+  </mat-form-field>
+
+  </div>   
+</div>
+<br>
+
+<br>
+<table class="table">
+    <thead style="background-color: rgb(47, 173, 223)">
+        <tr style="color: lightgoldenrodyellow">
+          
+          <!-- <th (click)="sort('subsubcatname')">Product Id</th> -->
+          <th>Product Name</th>
+          <th>product Brand</th>
+          <th>Product Price</th>
+          <th>Product old price</th>
+
+          <th>Product type</th>
+          <th>Offer</th>
+          <th>Discount</th>
+          <th>Product Rating</th>
+          <th>Product Color</th>
+          <th>Quantity</th>
+          <!-- <th>Description</th> -->
+          <th>Category</th>
+          <th>SubCategory</th>
+          <th>SubSubCategory</th>
+          <th>Edit</th>
+         </tr>
+      </thead>
+      <tbody  style="background-color:snow">
+          <tr *ngFor="let x of product_data | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage:p };">
+              <ng-container *ngIf="temp!=x._id;else elsdiv">  
+            
+           <td>{{x.productname}}</td>
+           <td>{{x.pbrand}}</td>
+           <td>{{x.productPrice}}</td>
+           <td>{{x.productoldprice}}</td>
+           <td>{{x.producttype}}</td>
+           <td>{{x.productrating}}</td>
+           <td>{{x.productoffer}}</td>
+           <td>{{x.productdisc}}</td>
+           <td>{{x.productcolor}}</td>
+           <td>{{x.quantity}}</td>
+           <!-- <td>{{x.product_desc}}</td> -->
+           <td>{{x.catid}}</td>
+           <td>{{x.subcatid}}</td>
+           <td>{{x.subsubcatid}}</td>
+           <td>
+            <button type="button" class="btn btn-info" (click)="funedit(x)">EDIT                                                                                                                                                                                                                                    </button>
+          </td>
+              </ng-container>
+            </tr>
+       
+        </tbody>
+       
+        </table>
+        <ng-template #elsdiv>
+<td><input type="text" [(ngModel)]="selectdata.productname" class="form-control" style="width:150px"></td>
+            <td><input type="text" [(ngModel)]="selectdata.productname" class="form-control" style="width:150px"></td>
+              <td> <select [(ngModel)]="selectdata.status" class="form-control" style="width:200px">
+                  <option value="1">Active</option>
+                  <option value="0">InActive</option>
+                 </select></td>
+        
+                 <td>
+        <input type="button" value="Save" class="btn btn-success" (click)="funmodify()">
+        &nbsp;
+        <input type="button" value="Cancel" class="btn btn-danger" (click)="this.temp=0">
+        
+        
+                 </td>
+                 
+          </ng-template>
+        <div align="center">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+      
+
+
